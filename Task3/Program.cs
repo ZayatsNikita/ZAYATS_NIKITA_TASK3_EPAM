@@ -27,9 +27,13 @@ namespace Task3
             shapes[7] = new FilmTriangle(1.5);
             shapes[8] = new PlasticTriangle(1.5, 1.5, 2);
 
+            WorkWithXml.StreamReaderWriter.XmlFileManagerWhichUsesStreamClasses.SaveDataUsingStreamWriter(shapes, @"D:\Learn\EPAM\task3\Task3\testFile.xml");
 
-            XmlFileManager.SaveDataUsingXmlWriter(shapes, @"D:\Learn\EPAM\task3\Task3\testFile.xml");
+            //XmlFileManager.SaveDataUsingXmlWriter(shapes, @"D:\Learn\EPAM\task3\Task3\testFile.xml");
             XmlFileManager.TryParse(@"D:\Learn\EPAM\task3\Task3\testFile.xml", null);
+
+            WorkWithXml.StreamReaderWriter.XmlFileManagerWhichUsesStreamClasses.Parse(@"D:\Learn\EPAM\task3\Task3\testFile.xml");
+
         }
     }
 }

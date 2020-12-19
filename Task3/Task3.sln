@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3", "Task3.csproj", "{946CCC93-CDB5-458C-B16E-764404251BC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task3", "Task3.csproj", "{946CCC93-CDB5-458C-B16E-764404251BC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringProcessingTests", "..\StringProcessingTests\StringProcessingTests.csproj", "{7BDC3AE5-1BE6-4215-AB81-6EAAAF8525A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{946CCC93-CDB5-458C-B16E-764404251BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{946CCC93-CDB5-458C-B16E-764404251BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{946CCC93-CDB5-458C-B16E-764404251BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDC3AE5-1BE6-4215-AB81-6EAAAF8525A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDC3AE5-1BE6-4215-AB81-6EAAAF8525A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDC3AE5-1BE6-4215-AB81-6EAAAF8525A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDC3AE5-1BE6-4215-AB81-6EAAAF8525A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

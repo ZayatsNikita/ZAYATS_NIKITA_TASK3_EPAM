@@ -12,22 +12,27 @@ namespace Task3
         Blue,
         Transparent
     }
-    public enum ExistShape
+    public enum ExistShapes
     {
-        PaperTriangle,
-        PaperRegularPentagon,
-        PaperRectangle,
-        PaperCircle,
-
-        FilmTriangle,
-        FilmRegularPentagon,
-        FilmRectangle,
         FilmCircle,
+        FilmRectangle,
+        FilmRegularPentagon,
+        FilmTriangle,
 
-        PlasticTriangle,
-        PlasticRegularPentagon,
+
+
+        PaperCircle,
+        PaperRectangle,
+        PaperRegularPentagon,
+        PaperTriangle,
+
+
+
+        PlasticCircle,
         PlasticRectangle,
-        PlasticCircle
+        PlasticRegularPentagon,
+        PlasticTriangle
+
     }
     
 

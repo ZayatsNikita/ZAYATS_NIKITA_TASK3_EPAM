@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <shapes>
   <PaperRectangle color="Transparent" integrity="True">
     <count_of_sides>2</count_of_sides>
@@ -17,32 +17,32 @@
   </PlasticRectangle>
   <PaperCircle color="Transparent" integrity="True">
     <count_of_sides>1</count_of_sides>
-    <double>4.5</double>
+    <double>4,5</double>
   </PaperCircle>
   <FilmCircle color="Transparent" integrity="True">
     <count_of_sides>1</count_of_sides>
-    <double>4.5</double>
+    <double>4,5</double>
   </FilmCircle>
   <PlasticCircle color="Transparent" integrity="True">
     <count_of_sides>1</count_of_sides>
-    <double>4.5</double>
+    <double>4,5</double>
   </PlasticCircle>
   <PaperTriangle color="Transparent" integrity="True">
     <count_of_sides>3</count_of_sides>
-    <double>1.5</double>
-    <double>1.5</double>
+    <double>1,5</double>
+    <double>1,5</double>
     <double>2</double>
   </PaperTriangle>
   <FilmTriangle color="Transparent" integrity="True">
     <count_of_sides>3</count_of_sides>
-    <double>1.5</double>
-    <double>1.5</double>
-    <double>1.5</double>
+    <double>1,5</double>
+    <double>1,5</double>
+    <double>1,5</double>
   </FilmTriangle>
   <PlasticTriangle color="Transparent" integrity="True">
     <count_of_sides>3</count_of_sides>
-    <double>1.5</double>
-    <double>1.5</double>
+    <double>1,5</double>
+    <double>1,5</double>
     <double>2</double>
   </PlasticTriangle>
 </shapes>

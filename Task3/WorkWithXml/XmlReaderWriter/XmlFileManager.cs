@@ -16,7 +16,7 @@ namespace Task3.XMLFileManager
         {
             xmlWriterSettings = new XmlWriterSettings();
             xmlWriterSettings.Indent = true;
-            existingshapes = Enum.GetNames(typeof(ExistShape));
+            existingshapes = Enum.GetNames(typeof(ExistShapes));
         }
 
         static public void SaveDataUsingXmlWriter(Shape[] shapes, string path)

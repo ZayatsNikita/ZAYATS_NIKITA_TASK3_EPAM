@@ -24,6 +24,26 @@ namespace Task3
                 return false;
 
             }
+        }
+        public static int intdefOf(this string[] array, string forSeach)
+        {
+            if (array == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                int length = array.Length;
+                for (int index = 0; index < length; index++)
+                {
+                    if (forSeach == array[index])
+                    {
+                        return index;
+                    }
+                }
+                return -1;
+
+            }
 
         }
     }
