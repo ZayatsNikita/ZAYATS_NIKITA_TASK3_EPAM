@@ -1,45 +1,29 @@
 ﻿using System;
-using Task3.Validation;
+using Task3.AbstractModels.TypesOfShapes;
 using Task3.AbstractModels;
+using Task3.AbstractModels.ShapeMaterials;
 namespace Task3.ModelsOfGeometricShapes.PaperShapes
 {
-    class PaperCircle : PaperShape
+    class PaperCircle : Circle, IPaper
     {
-        public PaperCircle(Shape shape)
+        public PaperCircle(Shape shape) : base(shape)
         {
-            if (shape.GetType().BaseType == typeof(PaperShape))
+            
+        }
+        public PaperCircle(params double[] lengthsOfSides) : base(lengthsOfSides)
+        {
+          
+        }
+        public override void Paint(ShapeColor color)
+        {
+            if(Color != ShapeColor.Transparent)
             {
-                shape.CutNewShape();
-
-                LengthsOfSides = new double[1] { shape.SideOfSmallestLength * CutRatio};
-
-                Perimeter = LengthsOfSides[0] * 2 * Math.PI;
-
-                Area = Math.PI* LengthsOfSides[0]* LengthsOfSides[0];
-
-                SideOfSmallestLength = LengthsOfSides[0];
-
-                Paint(shape.Color);
+                throw new ArgumentException();
             }
             else
             {
-                throw new ArgumentOutOfRangeException();
+                _color = color;
             }
         }
-        public PaperCircle(params double[] lengthsOfSides)
-        {
-            if (!CreatingShapesValidation.IsCircle(lengthsOfSides))
-                throw new ArgumentException();
-
-            LengthsOfSides = lengthsOfSides;
-
-            Perimeter = LengthsOfSides[0] * 2 * Math.PI;
-
-            Area = Math.PI * LengthsOfSides[0] * LengthsOfSides[0];
-
-            SideOfSmallestLength = LengthsOfSides[0];
-        }
-        public override double Area { get; protected set; }
-        public override double Perimeter { get; protected set; }
     }
 }

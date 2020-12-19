@@ -1,43 +1,21 @@
 ﻿using System;
+using Task3.AbstractModels.TypesOfShapes;
 using Task3.AbstractModels;
-using Task3.Validation;
+using Task3.AbstractModels.ShapeMaterials;
+
 namespace Task3.ModelsOfGeometricShapes.FilmShapes
 {
-    class FilmCircle : FilmShape
+    class FilmCircle :Circle ,IFilm
     {
-        public FilmCircle(Shape shape)
+        public FilmCircle(Shape shape) : base(shape)
         {
-            if (shape.GetType().BaseType == typeof(PaperShape))
-            {
-                shape.CutNewShape();
-
-                LengthsOfSides = new double[1] { shape.SideOfSmallestLength * CutRatio };
-
-                Perimeter = LengthsOfSides[0] * 2 * Math.PI;
-
-                Area = Math.PI * LengthsOfSides[0] * LengthsOfSides[0];
-
-                SideOfSmallestLength = LengthsOfSides[0];
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
         }
-        public FilmCircle(params double[] lengthsOfSides)
+        public FilmCircle(params double[] lengthsOfSides) : base(lengthsOfSides)
+        { 
+        }
+        public override void Paint(ShapeColor color)
         {
-            if (!CreatingShapesValidation.IsCircle(lengthsOfSides))
-                throw new ArgumentException();
-
-            LengthsOfSides = lengthsOfSides;
-
-            Perimeter = LengthsOfSides[0] * 2 * Math.PI;
-
-            Area = Math.PI * LengthsOfSides[0] * LengthsOfSides[0];
-
-            SideOfSmallestLength = LengthsOfSides[0];
+            throw new ArgumentException();
         }
-        public override double Area { get; protected set; }
-        public override double Perimeter { get; protected set; }
     }
 }

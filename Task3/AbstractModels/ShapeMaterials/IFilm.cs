@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Task3.XMLFileManager
+namespace Task3.AbstractModels.ShapeMaterials
 {
-    class XMLFileManager
+    public interface IFilm
     {
-
     }
 }

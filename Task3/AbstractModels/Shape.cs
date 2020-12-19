@@ -4,9 +4,8 @@ using System.Text;
 using System.Linq;
 namespace Task3.AbstractModels
 {
-    abstract class Shape
+    public abstract class Shape
     {
-
         protected const double CutRatio = 0.1;
 
         protected ShapeColor _color = ShapeColor.Transparent;

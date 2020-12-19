@@ -4,7 +4,7 @@ using Task3.AbstractModels;
 using Task3.ModelsOfGeometricShapes.PlasticShapes;
 using Task3.ModelsOfGeometricShapes.FilmShapes;
 using Task3.ModelsOfGeometricShapes.PaperShapes;
-
+using Task3.XMLFileManager;
 
 
 namespace Task3
@@ -28,10 +28,8 @@ namespace Task3
             shapes[8] = new PlasticTriangle(1.5, 1.5, 2);
 
 
-            foreach(Shape shape in shapes)
-            {
-                Console.WriteLine(shape.Area);
-            }
+            XmlFileManager.SaveDataUsingXmlWriter(shapes, @"D:\Learn\EPAM\task3\Task3\testFile.xml");
+            XmlFileManager.TryParse(@"D:\Learn\EPAM\task3\Task3\testFile.xml", null);
         }
     }
 }

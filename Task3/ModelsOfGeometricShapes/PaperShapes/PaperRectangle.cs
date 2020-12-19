@@ -1,54 +1,28 @@
 ﻿using System;
+using Task3.AbstractModels.TypesOfShapes;
 using Task3.AbstractModels;
-using Task3.Validation;
-using System.Linq;
+using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.PaperShapes
 {
-    class PaperRectangle : PaperShape
+    class PaperRectangle : Rectangle, IPaper
     {
-        public PaperRectangle(Shape shape)
+        public PaperRectangle(Shape shape) : base(shape)
         {
-            if (shape.GetType().BaseType == typeof(PaperShape))
+        }
+        public PaperRectangle(params double[] lengthsOfSides) : base(lengthsOfSides)
+        {
+        }
+        public override void Paint(ShapeColor color)
+        {
+            if (Color != ShapeColor.Transparent)
             {
-                shape.CutNewShape();
-
-                double lengthOfSize = shape.SideOfSmallestLength * CutRatio;
-
-                LengthsOfSides = new double[2] { lengthOfSize, lengthOfSize };
-
-                Perimeter = 2 * (LengthsOfSides[0] + LengthsOfSides[1]);
-                
-                Area = LengthsOfSides[0] * LengthsOfSides[1];
-                
-                SideOfSmallestLength = LengthsOfSides[0] > LengthsOfSides[1] ? LengthsOfSides[1] : LengthsOfSides[0];
-
-                Paint(shape.Color);
+                throw new NotSupportedException();
             }
             else
             {
-                throw new ArgumentOutOfRangeException();
+                _color = color;
             }
         }
-        public PaperRectangle(params double[] lengthsOfSides)
-        {
-            if (!CreatingShapesValidation.IsRectangle(lengthsOfSides))
-                throw new ArgumentException();
-
-            if (lengthsOfSides.Length == 1)
-            {
-                LengthsOfSides = new double[2] { lengthsOfSides[0], lengthsOfSides[0]};
-                SideOfSmallestLength = lengthsOfSides[0];
-            }
-            else
-            {
-                LengthsOfSides = lengthsOfSides;
-            }
-            SideOfSmallestLength = LengthsOfSides[0] > LengthsOfSides[1] ? LengthsOfSides[1] : LengthsOfSides[0];
-            Perimeter = 2*(LengthsOfSides[0] + LengthsOfSides[1]);
-            Area = LengthsOfSides[0] * LengthsOfSides[1];
-        }
-        public override double Area { get; protected set; }
-        public override double Perimeter { get; protected set; }
     }
 }
