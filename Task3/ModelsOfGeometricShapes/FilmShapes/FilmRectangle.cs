@@ -8,7 +8,11 @@ namespace Task3.ModelsOfGeometricShapes.FilmShapes
     public class FilmRectangle : Rectangle,IFilm
     {
         public FilmRectangle(Shape shape) : base(shape)
-        { 
+        {
+            if (shape.GetType().GetInterface("Task3.AbstractModels.ShapeMaterials.IFilm") == null)
+            {
+                throw new ArgumentException();
+            }
         }
         public FilmRectangle(params double[] lengthsOfSides) : base(lengthsOfSides)
         {

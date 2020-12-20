@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Task3.AbstractModels.ShapeMaterials
 {
+    /// <summary>
+    /// Interface that applies to all paper shapes
+    /// </summary>
     public interface IPaper
     {
-        protected const int AllowedNumberOfPaintLayers = 1;
     }
 }

@@ -9,6 +9,10 @@ namespace Task3.ModelsOfGeometricShapes.PlasticShapes
     {
         public PlasticCircle(Shape shape) : base(shape)
         {
+            if (shape.GetType().GetInterface("Task3.AbstractModels.ShapeMaterials.IPlastic") == null)
+            {
+                throw new ArgumentException();
+            }
         }
         public PlasticCircle(params double[] lengthsOfSides) : base(lengthsOfSides)
         {

@@ -9,9 +9,7 @@ namespace Task3.AbstractModels.TypesOfShapes
     public abstract class Triangle : Shape
     {
         public Triangle(Shape shape)
-        {
-            if (/*shape.GetType().BaseType == typeof(PaperShape)*/true)
-            {
+        {   
                 shape.CutNewShape();
 
                 double lengthOfSize = shape.SideOfSmallestLength * CutRatio;
@@ -26,11 +24,9 @@ namespace Task3.AbstractModels.TypesOfShapes
 
                 SideOfSmallestLength = LengthsOfSides.Min();
 
-                Paint(shape.Color);
-            }
-            else
+            if (shape.Color != ShapeColor.Transparent)
             {
-                throw new ArgumentOutOfRangeException();
+                Paint(shape.Color);
             }
         }
         public Triangle(params double[] lengthsOfSides)
@@ -55,8 +51,6 @@ namespace Task3.AbstractModels.TypesOfShapes
             double semiperimeter = Perimeter / 2;
             Area = Math.Sqrt(semiperimeter * (semiperimeter - LengthsOfSides[0]) * (semiperimeter - LengthsOfSides[1]) * (semiperimeter - LengthsOfSides[2]));
         }
-        public override double Area { get; protected set; }
-        public override double Perimeter { get; protected set; }
     }
 }
 

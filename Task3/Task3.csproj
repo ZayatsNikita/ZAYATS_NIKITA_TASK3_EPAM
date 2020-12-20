@@ -6,8 +6,4 @@
     <AssemblyName>Task3</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="AbstractModels\Interfaces\" />
-  </ItemGroup>
-
 </Project>

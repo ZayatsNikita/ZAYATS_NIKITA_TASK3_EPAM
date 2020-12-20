@@ -9,6 +9,10 @@ namespace Task3.ModelsOfGeometricShapes.PaperShapes
     {
         public PaperRectangle(Shape shape) : base(shape)
         {
+            if (shape.GetType().GetInterface("Task3.AbstractModels.ShapeMaterials.IPaper") == null)
+            {
+                throw new ArgumentException();
+            }
         }
         public PaperRectangle(params double[] lengthsOfSides) : base(lengthsOfSides)
         {

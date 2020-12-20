@@ -9,6 +9,10 @@ namespace Task3.ModelsOfGeometricShapes.FilmShapes
     {
         public FilmRegularPentagon(Shape shape) : base(shape)
         {
+            if (shape.GetType().GetInterface("Task3.AbstractModels.ShapeMaterials.IFilm") == null)
+            {
+                throw new ArgumentException();
+            }
         }
         public FilmRegularPentagon(params double[] lengthsOfSides) : base(lengthsOfSides)
         {

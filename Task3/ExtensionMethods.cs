@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Task3
 {
@@ -8,7 +6,7 @@ namespace Task3
     {
         public static bool DoesItContain(this string[] array, string forSeach)
         {
-            if (array == null)
+            if (array == null || forSeach == null)
             {
                 throw new NullReferenceException();
             }
@@ -27,7 +25,7 @@ namespace Task3
         }
         public static int intdefOf(this string[] array, string forSeach)
         {
-            if (array == null)
+            if (array == null || forSeach == null)
             {
                 throw new NullReferenceException();
             }

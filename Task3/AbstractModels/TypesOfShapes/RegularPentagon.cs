@@ -8,8 +8,6 @@ namespace Task3.AbstractModels.TypesOfShapes
     {
         public RegularPentagon(Shape shape)
         {
-            if (/*shape.GetType().BaseType == typeof(PaperShape)*/true)
-            {
                 shape.CutNewShape();
 
                 double length = shape.SideOfSmallestLength * CutRatio;
@@ -18,15 +16,13 @@ namespace Task3.AbstractModels.TypesOfShapes
 
                 Perimeter = length * 5;
 
-                Area = 5 * length * length / 4 / Math.Tan(36);
+                Area =  Math.Sqrt(25+Math.Sqrt(5)*10)* length * length / 4 ;
 
                 SideOfSmallestLength = LengthsOfSides[0];
 
-                Paint(shape.Color);
-            }
-            else
+            if (shape.Color != ShapeColor.Transparent)
             {
-                throw new ArgumentOutOfRangeException();
+                Paint(shape.Color);
             }
         }
         public RegularPentagon(params double[] lengthsOfSides)
@@ -44,12 +40,11 @@ namespace Task3.AbstractModels.TypesOfShapes
 
             Perimeter = LengthsOfSides[0] * 5;
 
-            Area = Area = 5 * LengthsOfSides[0] * LengthsOfSides[0] / 4 / Math.Tan(36);
+
+            Area = Math.Sqrt(25 + Math.Sqrt(5) * 10) * LengthsOfSides[0] * LengthsOfSides[0] / 4;
 
             SideOfSmallestLength = LengthsOfSides[0];
         }
-        public override double Area { get; protected set; }
-        public override double Perimeter { get; protected set; }
     }
 }
 

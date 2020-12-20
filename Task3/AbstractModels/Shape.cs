@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Linq;
 namespace Task3.AbstractModels
 {
     public abstract class Shape
     {
+        protected double area;
+        protected double perimetr;
         protected const double CutRatio = 0.1;
-
         protected ShapeColor _color = ShapeColor.Transparent;
         abstract public void Paint(ShapeColor color);
         public void CutNewShape()
@@ -25,8 +24,36 @@ namespace Task3.AbstractModels
         public double[] LengthsOfSides { get;protected set; }
         public ShapeColor Color { get => _color; }
         public double SideOfSmallestLength {get; protected set;}
-        abstract public double Area { get; protected set; }
-        abstract public double Perimeter { get; protected set; }
+        public double Area
+        {
+            get
+            {
+                if (IsIntact)
+                {
+                    return area;
+                }
+                throw new ArgumentException();
+            }
+            protected set
+            {
+                area = value;
+            }
+        }
+        public double Perimeter
+        {
+            get
+            {
+                if (IsIntact)
+                {
+                    return perimetr;
+                }
+                throw new ArgumentException();
+            }
+            protected set
+            {
+                perimetr = value;
+            }
+        }
         public override bool Equals(object obj)
         {
             if(obj == null)
@@ -53,6 +80,25 @@ namespace Task3.AbstractModels
                 return true;
             }
             return false;
+        }
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"{this.GetType().Name}; Perimeter = {Perimeter}; Area = {Area}; Color = {Color}; Sides:");
+            foreach( double length in LengthsOfSides)
+            {
+                stringBuilder.Append($" {length};");
+            }
+            return stringBuilder.ToString();
+        }
+        public override int GetHashCode()
+        {
+            int res =  _color.GetHashCode() + IsIntact.GetHashCode() + Area.GetHashCode() + Perimeter.GetHashCode();
+            foreach (double length in LengthsOfSides)
+            {
+                res += length.GetHashCode();
+            }
+            return res;
         }
     }
 }

@@ -9,6 +9,10 @@ namespace Task3.ModelsOfGeometricShapes.PaperShapes
     {
         public PaperRegularPentagon(Shape shape) : base(shape)
         {
+            if (shape.GetType().GetInterface("Task3.AbstractModels.ShapeMaterials.IPaper") == null)
+            {
+                throw new ArgumentException();
+            }
         }
         public PaperRegularPentagon(params double[] lengthsOfSides) : base(lengthsOfSides)
         {

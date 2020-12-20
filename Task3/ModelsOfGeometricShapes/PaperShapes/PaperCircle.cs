@@ -8,7 +8,10 @@ namespace Task3.ModelsOfGeometricShapes.PaperShapes
     {
         public PaperCircle(Shape shape) : base(shape)
         {
-            
+            if (shape.GetType().GetInterface("Task3.AbstractModels.ShapeMaterials.IPaper") == null)
+            {
+                throw new ArgumentException();
+            }
         }
         public PaperCircle(params double[] lengthsOfSides) : base(lengthsOfSides)
         {
