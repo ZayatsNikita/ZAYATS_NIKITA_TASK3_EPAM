@@ -5,9 +5,20 @@ using System.IO;
 using Task3.AbstractModels;
 namespace Task3.WorkWithXml.StreamReaderWriter
 {
+    /// <summary>
+    /// Class that allows you to read information about shapes in xml format to a file ,<para></para>
+    /// as well as extract this information using the StreamWriter and StreamReader classes.
+    /// </summary>
     public static class StreamFileManager
     {
         private static string startOfXmlDoc = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n";
+        /// <summary>
+        /// A method that writes information to a file.
+        /// </summary>
+        /// <param name="shapes">Array of shapes to be written.</param>
+        /// <param name="path">Name of the file to which the information will be written.</param>
+        /// <remarks>All information that was previously in the file will be deleted.</remarks>
+        /// <exception cref="NullReferenceException">Throw if array was passed is equlas to null</exception>
         static public void SaveDataUsingStreamWriter(Shape[] shapes, string path)
         {
             if (shapes == null)
@@ -36,29 +47,50 @@ namespace Task3.WorkWithXml.StreamReaderWriter
                 writer.Close();
             }
         }
+        /// <summary>
+        /// A method that translates information from a file specified in the required format into a list of shapes.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>List of figures.</returns>
+        /// <exception cref="FileNotFoundException">Throw if the file was not found.</exception>
+        /// <exception cref="FormatException">Throw if the file contains information in the wrong format.</exception>
         static public List<Shape> Parse(string path)
         {
+            bool catchEx = false;
             if (File.Exists(path))
             {
+                List<Shape> shapes;
                 using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     StreamReader streamReader = new StreamReader(fileStream);
-                    List<Shape> shapes;
+                    
                     string forProcessing = streamReader.ReadToEnd();
                     try
                     {
                         shapes = StringProcessing.GetDescriptionOfTheShape(forProcessing);
                     }
+                    catch(FormatException ex)
+                    {
+                        catchEx = true;
+                        throw ex;
+                    }
                     catch(Exception ex)
                     {
+                        catchEx = true;
                         throw ex;
                     }
                     finally
                     {
-                        streamReader.Close();
+                        if (catchEx)
+                        {
+                            fileStream.Close();
+                            streamReader.Close();
+                        }
+                        
                     }
-                    return shapes;
+                    streamReader.Close();
                 }
+                return shapes;
             }
             else
             {

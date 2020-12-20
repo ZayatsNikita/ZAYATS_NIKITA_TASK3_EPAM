@@ -6,8 +6,16 @@ using Task3.Validation;
 
 namespace Task3.AbstractModels.TypesOfShapes
 {
+    /// <summary>
+    /// Сlass that describes a Triangle.
+    /// </summary>
     public abstract class Triangle : Shape
     {
+        /// <summary>
+        /// A constructor that cuts triangle from another shape.
+        /// </summary>
+        /// <param name="shape">The shape from which the new triangle will be cut.</param>
+        /// <exception cref="InvalidOperationException">Throw if another shape has already been cut from the shape.</exception>
         public Triangle(Shape shape)
         {   
                 shape.CutNewShape();
@@ -29,6 +37,11 @@ namespace Task3.AbstractModels.TypesOfShapes
                 Paint(shape.Color);
             }
         }
+        /// <summary>
+        /// Constructor that creates a triangle with a given sides.
+        /// </summary>
+        /// <param name="lengthsOfSides">The length of the sides.<para>It is possible to transfer one side, all other sides will get the same value.</para></param>
+        /// <exception cref="InvalidOperationException">Thrown if a one of sides was passed less than or equal to zero.</exception>
         public Triangle(params double[] lengthsOfSides)
         {
             if (!CreatingShapesValidation.IsTreangle(lengthsOfSides))
@@ -43,7 +56,6 @@ namespace Task3.AbstractModels.TypesOfShapes
             {
                 LengthsOfSides = lengthsOfSides;
             }
-
             SideOfSmallestLength = LengthsOfSides[0] > LengthsOfSides[1] ? LengthsOfSides[1] : LengthsOfSides[0];
             SideOfSmallestLength = SideOfSmallestLength > LengthsOfSides[2] ? LengthsOfSides[2] : SideOfSmallestLength;
 

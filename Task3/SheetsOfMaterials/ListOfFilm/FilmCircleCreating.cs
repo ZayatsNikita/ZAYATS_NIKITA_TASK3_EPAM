@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Task3;
 using Task3.AbstractModels;
 using Task3.ModelsOfGeometricShapes.FilmShapes;
 namespace Task3.SheetsOfMaterials.ListOfFilm
 {
-    class FilmCircleCreating : ISheetOfMaterial
+    /// <summary>
+    /// The class that is responsible for cutting out the FilmCircle.
+    /// </summary>
+    internal class FilmCircleCreating : IСuttingShape
     {
-        Shape ISheetOfMaterial.CutShape(ShapeColor shapeColor, double[] lengthOfSodes)
+        /// <summary>
+        /// Method that cuts out  FilmCircle.
+        /// </summary>
+        /// <param name="lengthOfSodes">length of the sides of the shape.</param>
+        /// <returns>new  FilmCircle.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if a one of sides was passed less than or equal to zero.</exception>
+        public Shape CutShape(double[] lengthOfSodes)
         {
-            if (shapeColor != ShapeColor.Transparent)
-            {
-                throw new ArgumentException();
-            }
-            else
-            {
                 return new FilmCircle(lengthOfSodes);
-            }
         }
     }
 }

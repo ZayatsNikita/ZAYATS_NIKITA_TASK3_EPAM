@@ -1,14 +1,37 @@
 ﻿using System;
 using System.Text;
+using Task3.AbstractModels.ComonInterfaces;
+
 namespace Task3.AbstractModels
 {
-    public abstract class Shape
+    /// <summary>
+    /// A class that describes an abstract shape.
+    /// </summary>
+    public abstract class Shape : IShape
     {
         protected double area;
         protected double perimetr;
         protected const double CutRatio = 0.1;
         protected ShapeColor _color = ShapeColor.Transparent;
-        abstract public void Paint(ShapeColor color);
+
+        /// <summary>
+        /// The method that is responsible for painting the shape.
+        /// </summary>
+        /// <param name="color">The new color of the shape.</param>
+        /// <exception cref="ArgumentException">Throw if the figure is trying to be repainted in a transparent color.</exception>
+        virtual public void Paint(ShapeColor color)
+        {
+            if (color == ShapeColor.Transparent)
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        /// <summary>
+        /// Method that sets the value of the <c>isintact</c> property to false.
+        /// </summary>
+        /// <remarks>Should be called if one shape is cut from another.</remarks>
+        /// <exception cref="InvalidOperationException">Throw if another shape has already been cut from the shape.</exception>
         public void CutNewShape()
         {
             if (IsIntact)
@@ -17,13 +40,30 @@ namespace Task3.AbstractModels
             }
             else
             {
-                throw new ArgumentOutOfRangeException();
+                throw new InvalidOperationException();
             }
         }
+        /// <summary>
+        /// Property describing the integrity of the shape.
+        /// </summary>
         public bool IsIntact { get; private set; } = true;
+        /// <summary>
+        /// Property describing the length of the sides of the shape.
+        /// </summary>
         public double[] LengthsOfSides { get;protected set; }
+        /// <summary>
+        /// Property describing the color of the shape.
+        /// </summary>
         public ShapeColor Color { get => _color; }
+
+        /// <summary>
+        /// Property describing the smallest side of the shape.
+        /// </summary>
         public double SideOfSmallestLength {get; protected set;}
+        /// <summary>
+        /// Property describing the area of the shape.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">If the integrity of the shape is broken.</exception>
         public double Area
         {
             get
@@ -32,13 +72,17 @@ namespace Task3.AbstractModels
                 {
                     return area;
                 }
-                throw new ArgumentException();
+                throw new InvalidOperationException();
             }
             protected set
             {
                 area = value;
             }
         }
+        /// <summary>
+        /// Property describing the perimeter of the shape.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">If the integrity of the shape is broken.</exception>
         public double Perimeter
         {
             get
@@ -47,7 +91,7 @@ namespace Task3.AbstractModels
                 {
                     return perimetr;
                 }
-                throw new ArgumentException();
+                throw new InvalidOperationException();
             }
             protected set
             {

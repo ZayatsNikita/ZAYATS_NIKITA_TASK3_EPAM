@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-namespace Task3.Validation
+﻿namespace Task3.Validation
 {
-    static public class CreatingShapesValidation
+    /// <summary>
+    /// A class that provides the ability to check the sides for compliance with certain geometric shapes.
+    /// </summary>
+    static internal class CreatingShapesValidation
     {
-        static public bool IsTreangle(in double[] lengthsOfSides)
+        /// <summary>
+        /// A method that checks whether it is possible to get a triangle from the specified sides.
+        /// </summary>
+        /// <param name="lengthsOfSides">The lengths of the sides.</param>
+        /// <returns>True if you can create a triangle, False otherwise.</returns>
+        static internal bool IsTreangle(in double[] lengthsOfSides)
         {
             if ((lengthsOfSides?.Length ?? 0) == 0 || (lengthsOfSides.Length != 3) && (lengthsOfSides.Length != 1))
                 return false;
@@ -44,6 +48,11 @@ namespace Task3.Validation
 
         }
 
+        /// <summary>
+        /// A method that checks whether it is possible to get a rectangle from the specified sides.
+        /// </summary>
+        /// <param name="lengthsOfSides">The lengths of the sides.</param>
+        /// <returns>True if you can create a rectangle, False otherwise.</returns>
         static public bool IsRectangle(in double[] lengthsOfSides)
         {
             if ((lengthsOfSides?.Length ?? 0) == 0 || (lengthsOfSides.Length != 2) && (lengthsOfSides.Length != 1))
@@ -62,7 +71,12 @@ namespace Task3.Validation
             return !AreThereAnyNegativeElements(lengthsOfSides);
         }
 
-        static public bool IsRegularPentagon(in double[] lengthsOfSides)
+        /// <summary>
+        /// A method that checks whether it is possible to get a regular pentagon from the specified sides.
+        /// </summary>
+        /// <param name="lengthsOfSides">The lengths of the sides.</param>
+        /// <returns>True if you can create a regular pentagon, False otherwise.</returns>
+        static internal bool IsRegularPentagon(in double[] lengthsOfSides)
         {
             if ((lengthsOfSides?.Length ?? 0) != 1 && lengthsOfSides.Length != 5)
                 return false;
@@ -79,7 +93,11 @@ namespace Task3.Validation
             return !AreThereAnyNegativeElements(lengthsOfSides);
         }
 
-
+        /// <summary>
+        /// A method that checks an array of sides for negative length sides.
+        /// </summary>
+        /// <param name="lengthsOfSides">The lengths of the sides.</param>
+        /// <returns>True if there are negative sides in array, False in otherwise</returns>
         private static bool AreThereAnyNegativeElements(in double[] lengthsOfSides)
         {
             foreach (double value in lengthsOfSides)

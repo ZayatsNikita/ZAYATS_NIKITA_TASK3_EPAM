@@ -4,18 +4,20 @@ using Task3.ModelsOfGeometricShapes.FilmShapes;
 
 namespace Task3.SheetsOfMaterials.ListOfFilm
 {
-    class FilmRegularPentagonCreating : ISheetOfMaterial
+    /// <summary>
+    /// The class that is responsible for cutting out the  FilmRegularPentagon.
+    /// </summary>
+    class FilmRegularPentagonCreating : IСuttingShape
     {
-        public Shape CutShape(ShapeColor shapeColor, double[] lengthOfSodes)
+        /// <summary>
+        /// Method that cuts out  FilmRegularPentagon.
+        /// </summary>
+        /// <param name="lengthOfSodes">Length of the sides of the shape.</param>
+        /// <returns>new  FilmRegularPentagon.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if a one of sides was passed less than or equal to zero.</exception>
+        public Shape CutShape(double[] lengthOfSodes)
         {
-            if (shapeColor != ShapeColor.Transparent)
-            {
-                throw new ArgumentException();
-            }
-            else
-            {
                 return new FilmRegularPentagon(lengthOfSodes);
-            }
         }
     }
 }

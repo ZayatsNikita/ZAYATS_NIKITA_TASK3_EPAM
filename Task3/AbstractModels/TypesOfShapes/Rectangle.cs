@@ -1,12 +1,18 @@
 ﻿using System;
-using Task3.AbstractModels;
 using Task3.Validation;
-using System.Linq;
 
 namespace Task3.AbstractModels.TypesOfShapes
 {
+    /// <summary>
+    /// Сlass that describes a Rectangle.
+    /// </summary>
     public abstract class Rectangle : Shape
     {
+        /// <summary>
+        /// A constructor that cuts rectengle from another shape.
+        /// </summary>
+        /// <param name="shape">The shape from which the new rectengle will be cut.</param>
+        /// <exception cref="InvalidOperationException">Throw if another shape has already been cut from the shape.</exception>
         public Rectangle(Shape shape)
         {
                 shape.CutNewShape();
@@ -26,6 +32,12 @@ namespace Task3.AbstractModels.TypesOfShapes
                 Paint(shape.Color);
             }
         }
+
+        /// <summary>
+        /// Constructor that creates a rectengle with a given sides.
+        /// </summary>
+        /// <param name="lengthsOfSides">The length of the sides.<para>It is possible to transfer one side, all other sides will get the same value.</para></param>
+        /// <exception cref="InvalidOperationException">Thrown if a one of sides was passed less than or equal to zero.</exception>
         public Rectangle(params double[] lengthsOfSides)
         {
             if (!CreatingShapesValidation.IsRectangle(lengthsOfSides))

@@ -8,17 +8,31 @@ using Task3.SheetsOfMaterials;
     
 namespace Task3.XMLFileManager.XmlReaderWriter
 {
+    /// <summary>
+    /// Class that allows you to read information about shapes in xml format to a file ,<para></para>
+    /// as well as extract this information using the XmlWriter and XmlReader classes.
+    /// </summary>
     public static class XmlFileManager
     {
+
         static XmlWriterSettings xmlWriterSettings;
         static string[] existingshapes;
+        /// <summary>
+        /// A static constructor that sets the settings for writing data to a file, and also gets a list of all available shapes.
+        /// </summary>
         static XmlFileManager()
         {
             xmlWriterSettings = new XmlWriterSettings();
             xmlWriterSettings.Indent = true;
             existingshapes = Enum.GetNames(typeof(ExistShapes));
         }
-
+        /// <summary>
+        /// A method that writes information to a file.
+        /// </summary>
+        /// <param name="shapes">Array of shapes to be written.</param>
+        /// <param name="path">Name of the file to which the information will be written.</param>
+        /// <remarks>All information that was previously in the file will be deleted.</remarks>
+        /// <exception cref="NullReferenceException">Throw if array was passed is equlas to null</exception>
         static public void SaveDataUsingXmlWriter(Shape[] shapes, string path)
         {
                 if(shapes==null)
@@ -49,12 +63,20 @@ namespace Task3.XMLFileManager.XmlReaderWriter
                     xmlWriter.Close();
                 }
          }
+        /// <summary>
+        /// A method that translates information from a file specified in the required format into a list of shapes.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>List of figures.</returns>
+        /// <exception cref="FileNotFoundException">Throw if the file was not found.</exception>
+        /// <exception cref="FormatException">Throw if the file contains information in the wrong format.</exception>
         static public List<Shape> Parse(string path)
         {
             if (File.Exists(path))
             {
                 using (Stream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
+                    bool cathEx = false;
                     XmlReader reader = XmlReader.Create(fileStream);
                     List<Shape> listOfShape= new List<Shape>();
                     try
@@ -89,10 +111,33 @@ namespace Task3.XMLFileManager.XmlReaderWriter
                                             array[i] = Double.Parse(reader.ReadElementContentAsString());
 
                                         }
-                                        listOfShape.Add(UniversalSheet.CutShape(shapeName, array, color, isIntract));
+                                        try
+                                        {
+                                            listOfShape.Add(UniversalSheet.CutShape(shapeName, array, color, isIntract));
+                                        }
+                                        catch (FormatException ex)
+                                        {
+                                            cathEx = true ;
+                                            throw ex;
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            cathEx = true;
+                                            throw ex;
+                                        }
+                                        finally
+                                        {
+                                            if (cathEx)
+                                            {
+                                                reader.Close();
+                                                fileStream.Close();
+                                            }
+                                        }
                                     }
                                     else
                                     {
+                                        reader.Close();
+                                        fileStream.Close();
                                         throw new FormatException();
                                     }
                                 }
@@ -102,7 +147,13 @@ namespace Task3.XMLFileManager.XmlReaderWriter
                     }
                     catch(XmlException)
                     {
+                        
                         throw new FormatException();
+                    }
+                    finally
+                    {
+                        reader.Close();
+                        fileStream.Close();
                     }
                     if(listOfShape.Count==0)
                     {

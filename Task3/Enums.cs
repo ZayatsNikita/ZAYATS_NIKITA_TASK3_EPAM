@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Task3
 {
+    /// <summary>
+    /// Enumeration containing shape colors
+    /// </summary>
     public enum ShapeColor
     {
         Red,
@@ -12,6 +15,9 @@ namespace Task3
         Blue,
         Transparent
     }
+    /// <summary>
+    /// An enumeration that contains the names of existing non abstract shapes
+    /// </summary>
     public enum ExistShapes
     {
         FilmCircle,

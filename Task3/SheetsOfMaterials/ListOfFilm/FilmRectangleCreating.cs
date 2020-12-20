@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Task3.AbstractModels;
 using Task3.ModelsOfGeometricShapes.FilmShapes;
 
 namespace Task3.SheetsOfMaterials.ListOfFilm
 {
-    public class FilmRectangleCreating : ISheetOfMaterial
+    /// <summary>
+    /// The class that is responsible for cutting out the  FilmRectangle.
+    /// </summary>
+    internal class FilmRectangleCreating : IСuttingShape
     {
-        public Shape CutShape(ShapeColor shapeColor, double[] lengthOfSodes)
+        /// <summary>
+        /// Method that cuts out  FilmRectangle.
+        /// </summary>
+        /// <param name="lengthOfSodes">Length of the sides of the shape.</param>
+        /// <returns>new  FilmRectangle.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if a one of sides was passed less than or equal to zero.</exception>
+        public Shape CutShape(double[] lengthOfSodes)
         {
-            if(shapeColor!= ShapeColor.Transparent)
-            {
-                throw new ArgumentException();
-            }
-            else
-            {
-                return new FilmRectangle(lengthOfSodes);
-            }
+            return new FilmRectangle(lengthOfSodes);
         }
     }
 }
