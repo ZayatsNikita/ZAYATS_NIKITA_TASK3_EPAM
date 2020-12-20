@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.PaperShapes
 {
-    class PaperRegularPentagon : RegularPentagon,IPaper
+    public class PaperRegularPentagon : RegularPentagon,IPaper
     {
         public PaperRegularPentagon(Shape shape) : base(shape)
         {

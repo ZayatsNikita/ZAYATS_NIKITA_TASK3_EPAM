@@ -8,7 +8,7 @@ namespace Task3.AbstractModels.TypesOfShapes
     {
         public Circle(Shape shape)
         {
-            if (/*shape.GetType().BaseType == GetType().GetInt e*/true)
+            if (shape.GetType().GetInterfaces() == this.GetType().GetInterfaces())
             {
                 shape.CutNewShape();
 

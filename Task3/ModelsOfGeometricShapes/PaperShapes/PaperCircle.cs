@@ -4,7 +4,7 @@ using Task3.AbstractModels;
 using Task3.AbstractModels.ShapeMaterials;
 namespace Task3.ModelsOfGeometricShapes.PaperShapes
 {
-    class PaperCircle : Circle, IPaper
+    public class PaperCircle : Circle, IPaper
     {
         public PaperCircle(Shape shape) : base(shape)
         {

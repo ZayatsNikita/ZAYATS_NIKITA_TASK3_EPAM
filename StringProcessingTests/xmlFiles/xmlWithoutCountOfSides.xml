@@ -1,16 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <shapes>
   <FilmCircle color="Transparent" integrity="True">
-    <count_of_sides>1</count_of_sides>
+    <count_of_sides></count_of_sides>
     <double>3</double>
   </FilmCircle>
   <FilmRectangle color="Transparent" integrity="True">
-    <count_of_sides>2</count_of_sides>
+    <count_of_sides></count_of_sides>
     <double>4</double>
     <double>4</double>
   </FilmRectangle>
   <FilmRegularPentagon color="Transparent" integrity="True">
-    <count_of_sides>5</count_of_sides>
+    <count_of_sides></count_of_sides>
     <double>3</double>
     <double>3</double>
     <double>3</double>
@@ -18,7 +18,7 @@
     <double>3</double>
   </FilmRegularPentagon>
   <FilmTriangle color="Transparent" integrity="True">
-    <count_of_sides>3</count_of_sides>
+    <count_of_sides></count_of_sides>
     <double>2</double>
     <double>2</double>
     <double>2</double>

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Xml;
 using Task3.AbstractModels;
-using Task3.ModelsOfGeometricShapes.FilmShapes;
-using Task3.ModelsOfGeometricShapes.PaperShapes;
-using Task3.ModelsOfGeometricShapes.PlasticShapes;
+using System.Collections.Generic;
 using System.IO;
+using Task3.SheetsOfMaterials;
 
-namespace Task3.XMLFileManager
+    
+namespace Task3.XMLFileManager.XmlReaderWriter
 {
-    static class XmlFileManager
+    public static class XmlFileManager
     {
         static XmlWriterSettings xmlWriterSettings;
         static string[] existingshapes;
@@ -21,6 +21,10 @@ namespace Task3.XMLFileManager
 
         static public void SaveDataUsingXmlWriter(Shape[] shapes, string path)
         {
+                if(shapes==null)
+                {
+                    throw new NullReferenceException();
+                }
                 using (Stream fileStream = new FileStream(path, FileMode.Create))
                 {
                     double[] sides;
@@ -36,7 +40,7 @@ namespace Task3.XMLFileManager
                         xmlWriter.WriteElementString("count_of_sides", sides.Length.ToString());
                         foreach(double length in sides)
                         {
-                            xmlWriter.WriteElementString("double",length.ToString().Replace(',','.'));
+                            xmlWriter.WriteElementString("double",length.ToString());
                         }
                         xmlWriter.WriteEndElement();                        
                     }
@@ -45,51 +49,66 @@ namespace Task3.XMLFileManager
                     xmlWriter.Close();
                 }
          }
-        static public /*List<Shape>*/void TryParse(string path, Shape[] shapes)
+        static public List<Shape> Parse(string path)
         {
             if (File.Exists(path))
             {
                 using (Stream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     XmlReader reader = XmlReader.Create(fileStream);
-                    while (reader.Read())
+                    List<Shape> listOfShape= new List<Shape>();
+                    try
                     {
-                        if(reader.NodeType==XmlNodeType.Element)
+                        while (reader.Read())
                         {
-                            if(existingshapes.DoesItContain(reader.Name))
+                            if (reader.NodeType == XmlNodeType.Element)
                             {
-                                if(reader.HasAttributes)
+                                if (existingshapes.DoesItContain(reader.Name))
                                 {
-                                    ShapeColor color = (ShapeColor)Enum.Parse(typeof(ShapeColor),reader.GetAttribute("color"));
-                                    bool IsIntract = Boolean.Parse(reader.GetAttribute("integrity"));
-                                    int countOfSides = 0;
-                                    reader.Read();
-                                    reader.Read();
-                                    if (reader.Name == "count_of_sides")
+                                    string shapeName = reader.Name;
+                                    if (reader.HasAttributes)
                                     {
-                                        countOfSides = reader.ReadElementContentAsInt();
+                                        ShapeColor color = (ShapeColor)Enum.Parse(typeof(ShapeColor), reader.GetAttribute("color"));
+                                        bool isIntract = Boolean.Parse(reader.GetAttribute("integrity"));
+                                        int countOfSides = 0;
+                                        reader.Read();
+                                        reader.Read();
+                                        if (reader.Name == "count_of_sides")
+                                        {
+                                            countOfSides = reader.ReadElementContentAsInt();
+                                        }
+                                        else
+                                        {
+                                            throw new FormatException();
+                                        }
+                                        double[] array = new double[countOfSides];
+                                        Console.WriteLine(color + "    " + isIntract);
+                                        for (int i = 0; i < array.Length; i++)
+                                        {
+                                            reader.Skip();
+                                            array[i] = Double.Parse(reader.ReadElementContentAsString());
+
+                                        }
+                                        listOfShape.Add(UniversalSheet.CutShape(shapeName, array, color, isIntract));
                                     }
                                     else
                                     {
-                                        throw new ArgumentException();
+                                        throw new FormatException();
                                     }
-                                    double[] array = new double[countOfSides];
-                                    Console.WriteLine(color + "    " + IsIntract);
-                                    for (int i = 0; i < array.Length; i++)
-                                    {
-                                        reader.Skip();
-                                        reader.Read();
-                                        Console.WriteLine(reader.ReadString());
-                                    }
-                                }
-                                else
-                                {
-                                    throw new ArgumentException();
                                 }
                             }
-                        }
 
+                        }
                     }
+                    catch(XmlException)
+                    {
+                        throw new FormatException();
+                    }
+                    if(listOfShape.Count==0)
+                    {
+                        throw new FormatException();
+                    }
+                    return listOfShape;
                 }
             }
             else

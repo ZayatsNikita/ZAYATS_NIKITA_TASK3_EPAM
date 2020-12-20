@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.FilmShapes
 {
-    class FilmRegularPentagon : RegularPentagon,IFilm
+    public class FilmRegularPentagon : RegularPentagon,IFilm
     {
         public FilmRegularPentagon(Shape shape) : base(shape)
         {

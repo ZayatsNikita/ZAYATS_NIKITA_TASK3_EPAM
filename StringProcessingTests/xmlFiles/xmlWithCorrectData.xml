@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<shapes>
+  <PaperCircle color="Transparent" integrity="True">
+    <count_of_sides>1</count_of_sides>
+    <double>3</double>
+  </PaperCircle>
+  <PaperRectangle color="Transparent" integrity="True">
+    <count_of_sides>2</count_of_sides>
+    <double>4</double>
+    <double>4</double>
+  </PaperRectangle>
+  <PaperRegularPentagon color="Transparent" integrity="True">
+    <count_of_sides>5</count_of_sides>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+  </PaperRegularPentagon>
+  <PaperTriangle color="Transparent" integrity="True">
+    <count_of_sides>3</count_of_sides>
+    <double>2</double>
+    <double>2</double>
+    <double>2</double>
+  </PaperTriangle>
+  <FilmCircle color="Transparent" integrity="True">
+    <count_of_sides>1</count_of_sides>
+    <double>3</double>
+  </FilmCircle>
+  <FilmRectangle color="Transparent" integrity="True">
+    <count_of_sides>2</count_of_sides>
+    <double>4</double>
+    <double>4</double>
+  </FilmRectangle>
+  <FilmRegularPentagon color="Transparent" integrity="True">
+    <count_of_sides>5</count_of_sides>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+  </FilmRegularPentagon>
+  <FilmTriangle color="Transparent" integrity="True">
+    <count_of_sides>3</count_of_sides>
+    <double>2</double>
+    <double>2</double>
+    <double>2</double>
+  </FilmTriangle>
+  <PlasticCircle color="Transparent" integrity="True">
+    <count_of_sides>1</count_of_sides>
+    <double>3</double>
+  </PlasticCircle>
+  <PlasticRectangle color="Transparent" integrity="True">
+    <count_of_sides>2</count_of_sides>
+    <double>4</double>
+    <double>4</double>
+  </PlasticRectangle>
+  <PlasticRegularPentagon color="Transparent" integrity="True">
+    <count_of_sides>5</count_of_sides>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+    <double>3</double>
+  </PlasticRegularPentagon>
+  <PlasticTriangle color="Transparent" integrity="True">
+    <count_of_sides>3</count_of_sides>
+    <double>2</double>
+    <double>2</double>
+    <double>2</double>
+  </PlasticTriangle>
+</shapes>

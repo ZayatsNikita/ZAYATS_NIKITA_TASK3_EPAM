@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.PlasticShapes
 {
-    class PlasticCircle : Circle,IPlastic
+    public class PlasticCircle : Circle,IPlastic
     {
         public PlasticCircle(Shape shape) : base(shape)
         {

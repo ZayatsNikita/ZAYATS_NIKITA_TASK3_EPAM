@@ -35,5 +35,11 @@ namespace Task3
 
     }
     
+    public enum ExsisMaterialsInterfaces
+    {
+        IFilm,
+        IPaper,
+        IPlastic
+    }
 
 }

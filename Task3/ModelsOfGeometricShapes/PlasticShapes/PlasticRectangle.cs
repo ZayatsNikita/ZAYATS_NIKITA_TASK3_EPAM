@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.PlasticShapes
 {
-    class PlasticRectangle :Rectangle, IPlastic
+    public class PlasticRectangle :Rectangle, IPlastic
     {
         public PlasticRectangle(Shape shape) :base(shape)
         {

@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.FilmShapes
 {
-    class FilmTriangle : Triangle,IFilm
+    public class FilmTriangle : Triangle,IFilm
     {
         public FilmTriangle(Shape shape) : base(shape)
         {

@@ -50,11 +50,8 @@ namespace Task3.Validation
             {
                 return false;
             }
-            if (AreThereAnyNegativeElements(lengthsOfSides))
-            {
-                return false;
-            }
-            return true;
+            return !AreThereAnyNegativeElements(lengthsOfSides);
+            
         }
         static public bool IsCircle(in double[] lengthsOfSides)
         {
@@ -67,8 +64,18 @@ namespace Task3.Validation
 
         static public bool IsRegularPentagon(in double[] lengthsOfSides)
         {
-            if ((lengthsOfSides?.Length ?? 0) != 1 || lengthsOfSides.Length != 5)
+            if ((lengthsOfSides?.Length ?? 0) != 1 && lengthsOfSides.Length != 5)
                 return false;
+            if (lengthsOfSides.Length == 5)
+            {
+                for (int i = 1; i < 5; i++)
+                {
+                    if(lengthsOfSides[i] != lengthsOfSides[i-1])
+                    {
+                        return false;
+                    }
+                }
+            }
             return !AreThereAnyNegativeElements(lengthsOfSides);
         }
 

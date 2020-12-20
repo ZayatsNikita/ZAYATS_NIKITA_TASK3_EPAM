@@ -7,16 +7,18 @@ using Task3.AbstractModels;
 using Task3.AbstractModels.ShapeMaterials;
 using Task3.ModelsOfGeometricShapes.PlasticShapes;
 using Task3.ModelsOfGeometricShapes.PaperShapes;
+using Task3.WorkWithXml.StreamReaderWriter;
+using Task3.XMLFileManager.XmlReaderWriter;
 
 namespace Task3
 {
     public class ShapeBox
     {
-        private bool DoesFormExist(in Shape shape)
+        private bool DoesShapeExist(in Shape shape)
         {
-            foreach (Shape sh in shapes)
+            for (int i = 0; i < Count; i++)
             {
-                if (shape.Equals(shape))
+                if (shape.Equals(shapes[i]))
                 {
                     return true;
                 }
@@ -31,10 +33,11 @@ namespace Task3
             get
             {
                 double resultArea = 0;
-                foreach(Shape shape in shapes)
+                for (int i = 0; i < Count; i++)
                 {
-                    resultArea += shape.Area;
+                    resultArea += shapes[i].Area;
                 }
+
                 return resultArea;
             }
         }
@@ -42,12 +45,12 @@ namespace Task3
         {
             get
             {
-                double resultArea = 0;
-                foreach (Shape shape in shapes)
+                double resultPerimetr = 0;
+                for (int i = 0; i < Count; i++)
                 {
-                    resultArea += shape.Perimeter;
+                    resultPerimetr += shapes[i].Perimeter;
                 }
-                return resultArea;
+                return resultPerimetr;
             }
         }
         public ShapeBox()
@@ -56,24 +59,28 @@ namespace Task3
         }
         public void Add(Shape shape)
         {
+            if(shape==null)
+            {
+                throw new ArgumentNullException();
+            }
             if (Count + 1 > MaximumCapacity)
             {
                 throw new OutOfMemoryException();
             }
-            if (DoesFormExist(shape))
+            if (DoesShapeExist(shape))
             {
                 throw new ArgumentException();
             }
             shapes[Count] = shape;
             Count++;
         }
-        public int IndexOf(in Shape shape)
+        public int NumberOf(in Shape shape)
         {
             for (int i = 0; i < Count; i++)
             {
                 if (shape.Equals(shapes[i]))
                 {
-                    return i;
+                    return i+1;
                 }
             }
             return -1;
@@ -88,7 +95,14 @@ namespace Task3
                     result.Add(shapes[i]);
                 }
             }
-            return result;
+            if(result.Count!=0)
+            {
+                return result;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
         public List<Shape> ExtractAllFilmShapes()
         {
@@ -100,9 +114,16 @@ namespace Task3
                     result.Add(shapes[i]);
                 }
             }
-            return result;
+            if (result.Count != 0)
+            {
+                return result;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
-        public List<Shape> ExtractPlasticUnpaintedShapes()
+        public List<Shape> ExtractAllNonPaintedPlasticShapes()
         {
             List<Shape> result = new List<Shape>();
             for (int i = 0; i < Count; i++)
@@ -112,7 +133,14 @@ namespace Task3
                     result.Add(shapes[i]);
                 }
             }
-            return result;
+            if (result.Count != 0)
+            {
+                return result;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
         public Shape this[int numberOfShape]
         {
@@ -122,7 +150,7 @@ namespace Task3
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                return shapes[Count - 1];
+                return shapes[numberOfShape - 1];
             }
             set
             {
@@ -130,9 +158,12 @@ namespace Task3
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                shapes[Count - 1] = value;
+                if(value==null)
+                {
+                    throw new ArgumentNullException();
+                }
+                shapes[numberOfShape - 1] = value;
             }
-
         }
         public Shape ExtractShapeByNumber(int numberOfShape)
         {
@@ -141,15 +172,128 @@ namespace Task3
             
             Shape result = shapes[Count - 1];
 
-            int length = Count + 1;
+            Count--;
 
-            for (int i = numberOfShape - 1; i < length; i++)
+            for (int i = numberOfShape - 1; i < Count; i++)
             {
                 shapes[numberOfShape] = shapes[numberOfShape+1];
             }
-
+            
             return result;
         }
-         
+        public void SaveShapesToXmlUsingXmlWriter(string interfaceType,string path)
+        {
+            
+            if(interfaceType.ToLower() == "all" && Count!=0)
+            {
+                Shape[] array = new Shape[Count];
+                for (int i = 0; i < Count; i++)
+                {
+                    array[i] = shapes[i];
+                }
+                XmlFileManager.SaveDataUsingXmlWriter(array,path);
+                return;
+            }
+            else
+            {
+                string[] exMat = Enum.GetNames(typeof(ExsisMaterialsInterfaces));
+                int index = exMat.intdefOf(interfaceType);
+                Type type;
+                try
+                {
+                    type = Type.GetType($"Task3.AbstractModels.ShapeMaterials.{exMat[index]}");
+                }
+                catch(IndexOutOfRangeException)
+                {
+                    throw new ArgumentException();
+                }
+
+                List<Shape> result = new List<Shape>();
+                for (int i = 0; i < Count; i++)
+                {
+                    if (shapes[i].GetType().GetInterface($"Task3.AbstractModels.ShapeMaterials.{exMat[index]}") == type)
+                    {
+                        result.Add(shapes[i]);
+                    }
+                }
+                if (result.Count != 0)
+                {
+                    XmlFileManager.SaveDataUsingXmlWriter(result.ToArray(), path);
+                    return;
+                }
+            }
+            throw new InvalidOperationException();
+        }
+        public void SaveShapesToXmlUsingStreamWriter(string interfaceType, string path)
+        {
+                if (interfaceType.ToLower() == "all" && Count != 0)
+                {
+                    Shape[] array = new Shape[Count];
+                    for (int i = 0; i < Count; i++)
+                    {
+                        array[i] = shapes[i];
+                    }
+                    XmlFileManager.SaveDataUsingXmlWriter(array, path);
+                    return;
+                }
+                else
+                {
+                    string[] exMat = Enum.GetNames(typeof(ExsisMaterialsInterfaces));
+                    int index = exMat.intdefOf(interfaceType);
+                    Type type;
+                    try
+                    {
+                        type = Type.GetType($"Task3.AbstractModels.ShapeMaterials.{exMat[index]}");
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        throw new ArgumentException();
+                    }
+
+                    List<Shape> result = new List<Shape>();
+                    for (int i = 0; i < Count; i++)
+                    {
+                        if (shapes[i].GetType().GetInterface($"Task3.AbstractModels.ShapeMaterials.{exMat[index]}") == type)
+                        {
+                            result.Add(shapes[i]);
+                        }
+                    }
+                    if (result.Count != 0)
+                    {
+                        XmlFileManager.SaveDataUsingXmlWriter(result.ToArray(), path);
+                        return;
+                    }
+                }
+                throw new InvalidOperationException();
+        }
+        public void LoadShapesFromXmlUsingStreamReader(string filePath)
+        {
+            List<Shape> shapesFromFile = StreamFileManager.Parse(filePath);
+            AddCollection(shapesFromFile);
+        }
+        public void LoadShapesFromXmlUsingXmlReader(string filePath)
+        {
+            List<Shape> shapesFromFile = XmlFileManager.Parse(filePath);
+            AddCollection(shapesFromFile);
+        }
+        public void AddCollection(List<Shape> list)
+        {
+            if(list==null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (list.Count > 20)
+            {
+                throw new ArgumentException();
+            }
+            else
+            {
+                foreach (Shape shape in list)
+                {
+                    Add(shape);
+                }
+            }
+        }
+
     }
 }

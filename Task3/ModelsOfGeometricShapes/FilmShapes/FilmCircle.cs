@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.FilmShapes
 {
-    class FilmCircle :Circle ,IFilm
+    public class FilmCircle :Circle ,IFilm
     {
         public FilmCircle(Shape shape) : base(shape)
         {

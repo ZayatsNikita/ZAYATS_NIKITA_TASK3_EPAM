@@ -5,7 +5,7 @@ using Task3.AbstractModels.ShapeMaterials;
 
 namespace Task3.ModelsOfGeometricShapes.PaperShapes
 {
-    class PaperRectangle : Rectangle, IPaper
+    public class PaperRectangle : Rectangle, IPaper
     {
         public PaperRectangle(Shape shape) : base(shape)
         {
